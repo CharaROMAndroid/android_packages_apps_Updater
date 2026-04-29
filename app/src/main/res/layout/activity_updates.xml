@@ -46,8 +46,6 @@
         style="@style/SettingsLibButtonStyle.Expressive.Tonal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/check_for_updates"
-        android:textColor="@android:color/white"
-        app:backgroundTint="@color/brand_accent" />
+        android:text="@string/check_for_updates"/>
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

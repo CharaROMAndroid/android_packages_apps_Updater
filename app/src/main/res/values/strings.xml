@@ -23,7 +23,7 @@
 
     <!-- Directory where the update files will be downloaded and stored.
          WARNING: The application can and will delete any unknown file. -->
-    <string name="download_path" translatable="false">/data/lineageos_updates/</string>
+    <string name="download_path" translatable="false">/data/chararom_updates/</string>
 
     <!-- Header -->
     <string name="show_changelog">Recent changes</string>
@@ -44,7 +44,7 @@
           {type} - Build type
           {incr} - Incremental version
     -->
-    <string name="updater_server_url" translatable="false">https://raw.githubusercontent.com/CharaROM/OTA/refs/heads/main/devices/{device}.json</string>
+    <string name="updater_server_url" translatable="false">https://raw.githubusercontent.com/CharaROMAndroid/android_vendor_CharaOTA/hershey/{device}.json</string>
 
     <string name="verification_failed_notification">Verification failed</string>
     <string name="verifying_download_notification">Verifying update</string>

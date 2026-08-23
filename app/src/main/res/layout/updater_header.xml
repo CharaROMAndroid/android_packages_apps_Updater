@@ -54,7 +54,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:textColor="?android:attr/textColorPrimary"
-                android:text="Beta" />
+                android:text="Completionary/Stable" />
         <TextView
             android:id="@+id/header_android_version"
             style="@style/TextAppearance.EntityHeaderSummary"

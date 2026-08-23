@@ -663,6 +663,9 @@ public class UpdatesActivity extends UpdatesListActivity implements UpdateImport
         TextView headerSecurityPatch = findViewById(R.id.header_security_patch_level);
         headerSecurityPatch.setText(getString(R.string.header_android_security_update,
                 DeviceInfoUtils.getSecurityPatch()));
+
+	TextView headerBuildType = findViewById(R.id.header_release_channel);
+	headerBuildType.setText(DeviceInfoUtils.getReleaseType());
     }
 
     private void updateHeaderIconAndTitle() {

@@ -17,6 +17,7 @@ object Constants {
     const val PREF_AB_PERF_MODE = "ab_perf_mode"
     const val PREF_AUTO_DELETE_UPDATES = "auto_delete_updates"
     const val PREF_METERED_NETWORK_WARNING = "pref_metered_network_warning"
+    const val PREF_ROAMING_NETWORK_WARNING = "pref_roaming_network_warning"
     const val PREF_PERIODIC_CHECK_ENABLED = "periodic_check_enabled"
     const val PREF_UPDATE_RECOVERY = "update_recovery"
 

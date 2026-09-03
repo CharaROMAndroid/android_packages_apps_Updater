@@ -196,6 +196,15 @@ public class Utils {
         return cm.isActiveNetworkMetered();
     }
 
+    public static boolean isNetworkRoaming(Context context) {
+        ConnectivityManager cm = context.getSystemService(ConnectivityManager.class);
+        Network activeNetwork = cm.getActiveNetwork();
+        if (activeNetwork == null) return false;
+        NetworkCapabilities nc = cm.getNetworkCapabilities(activeNetwork);
+        if (nc == null) return false;
+        return !nc.hasCapability(NetworkCapabilities.NET_CAPABILITY_NOT_ROAMING);
+    }
+
     /**
      * Compares two json formatted updates list files
      *

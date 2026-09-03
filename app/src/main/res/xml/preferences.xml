@@ -43,6 +43,13 @@
             app:iconSpaceReserved="false" />
 
         <SwitchPreferenceCompat
+            android:key="pref_roaming_network_warning"
+            android:title="@string/menu_roaming_network_warning"
+            android:summary="@string/menu_roaming_network_warning_summary"
+            android:defaultValue="true"
+            app:iconSpaceReserved="false" />
+
+        <SwitchPreferenceCompat
             android:key="ab_perf_mode"
             android:title="@string/menu_ab_perf_mode"
             android:summary="@string/menu_ab_perf_mode_summary"

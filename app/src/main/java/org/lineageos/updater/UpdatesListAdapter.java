@@ -368,19 +368,38 @@ public class UpdatesListAdapter extends RecyclerView.Adapter<UpdatesListAdapter.
 
     private void downloadWithWarning(final String downloadId, boolean isResume) {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(mActivity);
-        boolean warn = preferences.getBoolean(Constants.PREF_METERED_NETWORK_WARNING, true);
-        if (!(Utils.isNetworkMetered(mActivity) && warn)) {
-            if (isResume) {
-                mUpdaterController.resumeDownload(downloadId);
-            } else {
-                mUpdaterController.startDownload(downloadId);
-            }
+        boolean warnMetered = preferences.getBoolean(Constants.PREF_METERED_NETWORK_WARNING, true);
+        boolean warnRoaming = preferences.getBoolean(Constants.PREF_ROAMING_NETWORK_WARNING, true);
+        
+        // Check metered network first
+        if (Utils.isNetworkMetered(mActivity) && warnMetered) {
+            showNetworkWarningDialog(downloadId, isResume, 
+                R.string.update_over_metered_network_title,
+                R.string.update_over_metered_network_message);
             return;
         }
+        
+        // Then check roaming
+        if (Utils.isNetworkRoaming(mActivity) && warnRoaming) {
+            showNetworkWarningDialog(downloadId, isResume,
+                R.string.update_over_roaming_network_title,
+                R.string.update_over_roaming_network_message);
+            return;
+        }
+        
+        // No warnings needed, proceed
+        if (isResume) {
+            mUpdaterController.resumeDownload(downloadId);
+        } else {
+            mUpdaterController.startDownload(downloadId);
+        }
+    }
 
+    private void showNetworkWarningDialog(final String downloadId, boolean isResume,
+            int titleRes, int messageRes) {
         new AlertDialog.Builder(mActivity)
-                .setTitle(R.string.update_over_metered_network_title)
-                .setMessage(R.string.update_over_metered_network_message)
+                .setTitle(titleRes)
+                .setMessage(messageRes)
                 .setPositiveButton(isResume ? R.string.action_resume : R.string.action_download,
                         (dialog, which) -> {
                             if (isResume) {

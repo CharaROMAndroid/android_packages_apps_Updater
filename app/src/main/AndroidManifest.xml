@@ -51,12 +51,14 @@
 
         <service
             android:name=".controller.UpdaterService"
+            android:exported="false"
             android:foregroundServiceType="specialUse">
             <property android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
                 android:value="updater"/>
         </service>
         <service
             android:name=".ExportUpdateService"
+            android:exported="false"
             android:foregroundServiceType="specialUse">
             <property android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
                 android:value="updater"/>
@@ -68,7 +70,7 @@
             </intent-filter>
         </receiver>
 
-        <receiver android:name=".UpdatesCheckReceiver" android:exported="true">
+        <receiver android:name=".UpdatesCheckReceiver" android:exported="false">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED"/>
             </intent-filter>

@@ -60,20 +60,26 @@ public class ExportUpdateService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        if (ACTION_START_EXPORTING.equals(intent.getAction())) {
-            if (mIsExporting) {
-                Log.e(TAG, "Already exporting an update");
-                Toast.makeText(this, R.string.toast_already_exporting, Toast.LENGTH_SHORT).show();
-                return START_NOT_STICKY;
-            }
-            mIsExporting = true;
-            File source = (File) intent.getSerializableExtra(EXTRA_SOURCE_FILE);
-            Uri destination = intent.getParcelableExtra(EXTRA_DEST_URI);
-            startExporting(source, destination);
-            Toast.makeText(this, R.string.toast_export_started, Toast.LENGTH_SHORT).show();
-        } else {
-            Log.e(TAG, "No action specified");
+        if (intent == null || !ACTION_START_EXPORTING.equals(intent.getAction())) {
+            Log.e(TAG, "No action specified or null intent");
+            stopSelf();
+            return START_NOT_STICKY;
         }
+        if (mIsExporting) {
+            Log.e(TAG, "Already exporting an update");
+            Toast.makeText(this, R.string.toast_already_exporting, Toast.LENGTH_SHORT).show();
+            return START_NOT_STICKY;
+        }
+        File source = (File) intent.getSerializableExtra(EXTRA_SOURCE_FILE);
+        Uri destination = intent.getParcelableExtra(EXTRA_DEST_URI);
+        if (source == null || destination == null) {
+            Log.e(TAG, "Missing source file or destination URI");
+            stopSelf();
+            return START_NOT_STICKY;
+        }
+        mIsExporting = true;
+        startExporting(source, destination);
+        Toast.makeText(this, R.string.toast_export_started, Toast.LENGTH_SHORT).show();
 
         if (!mIsExporting) {
             stopSelf();
